@@ -59,24 +59,30 @@ class DBStorage():
 
     def count(self, class_name, id):
         """count objects in the database"""
-        import importlib
-        # Import the module containing the class dynamically
-        module = importlib.import_module('models.' + class_name.lower())
-        # Get the class from the module
-        cls = getattr(module, class_name)
-
-        session = self.__create_session()
-        query = session.query(cls).filter_by(family_id=id, status=0).all()
         
-        count = len(query)  # count the objects in the list
-        return count
+        pass
 
     def get_polling_unit(self):
         """get polling unit"""
+        from models.polling_unit import PollingUnit
         session = self.__create_session()
-        query = session.query().all()
+        query = session.query(PollingUnit).all()
+        return query
+    
+    def get_polling_unit_by_id(self, polling_unit_id):
+        """get polling unit by id"""
+        from models.polling_unit import PollingUnit
+        session = self.__create_session()
+        query = session.query(PollingUnit).filter_by(uniqueid=polling_unit_id).first()
         return query
 
+    def get_polling_unit_results(self, polling_unit):
+        """get polling unit"""
+        from models.announced_pu_result import AnnouncedPuResult
+        session = self.__create_session()
+        query = session.query(AnnouncedPuResult).filter_by(polling_unit_uniqueid=polling_unit).all()
+        return query
+    
     def reload(self):
         """reload database session"""
         Base.metadata.create_all(self.__engine)

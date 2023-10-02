@@ -11,8 +11,8 @@
     <table class="ui orange celled striped table">
         <thead>
             <tr>
-                <th colspan="4">
-                    Git Repository
+                <th colspan="5">
+                    {{ title }}
                 </th>
             </tr>
         </thead>
@@ -22,17 +22,25 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Date Entered</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="one width">
-                1
-                </td>
-                <td>Initial commit</td>
-                <td>10 hours ago</td>
-                <td>10 hours ago</td>
-            </tr>
+            {% for polling_unit in polling_units %}
+            <a href="#" class="">
+                <tr>
+                    <td class="one width">{{ loop.index }}</td>
+                    <td>{{ polling_unit.polling_unit_name }}</td>
+                    <td>{{ polling_unit.polling_unit_description }}</td>
+                    <td>{{ polling_unit.date_entered }}</td>
+                    <td data-label="status">
+                        <div class="ui buttons">
+                            <a href="{{ url_for('route.polling_unit', polling_unit_id=polling_unit.polling_unit_id) }}"><button class="ui positive button active update-task-button">View</button></a>
+                        </div>
+                    </td>
+                </tr>
+            </a>
+            {% endfor %}
         </tbody>
     </table>
 </div>

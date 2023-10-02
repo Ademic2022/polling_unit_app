@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="ui container fluid">
+    <h3 class="ui block header">
+        {{ title }}
+    </h3>
+</div><br>
+<div class="ui container fluid">
+    <table class="ui orange celled striped table">
+        <thead>
+            <tr>
+                <th colspan="5">
+                    {{ title }}({{ polling_unit_name }})
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Sn</th>
+                <th>Party Abbreviation</th>
+                <th>Party Score</th>
+                <th>Date Entered</th>
+                <th>Entered By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in polling_unit_results %}
+            <a href="#" class="">
+                <tr>
+                    <td class="one width">{{ loop.index }}</td>
+                    <td>{{ result.party_abbreviation }}</td>
+                    <td>{{ result.party_score }}</td>
+                    <td>{{ result.date_entered.strftime('%b %d, %Y at %H:%M') }}</td>
+                    <td>{{ result.entered_by_user }}</td>
+                    
+                </tr>
+            </a>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
