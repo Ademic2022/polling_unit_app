@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="ui container fluid">
+    <h3 class="ui block header">
+        {{ title }}
+    </h3>
+</div><br>
+<div class="ui container fluid">
+    <table class="ui orange celled striped table">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    Git Repository
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Sn</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date Entered</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="one width">
+                1
+                </td>
+                <td>Initial commit</td>
+                <td>10 hours ago</td>
+                <td>10 hours ago</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
