@@ -46,14 +46,14 @@ def summed_results():
                     summed_results[party_abbreviation] += party_score
                 else:
                     summed_results[party_abbreviation] = party_score
-        redirect_url = url_for('route.summed_results')
+        # redirect_url = url_for('route.summed_results')
 
-        response_data = {
-            'summed_results': summed_results, 
-            'redirect_url': redirect_url
-        }
+        # response_data = {
+        #     'summed_results': summed_results, 
+        #     'redirect_url': redirect_url
+        # }
         """Return the summed results as JSON"""
-        return jsonify({'summed_results': response_data})
+        return jsonify({'summed_results': summed_results})
     
     lga = storage.get_lga()
     return render_template('summed_results.html', title='Summed Result', 

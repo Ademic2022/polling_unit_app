@@ -21,16 +21,25 @@ $(document).ready(function() {
             contentType: 'application/json',
             success: function(response) {
                 // Handle the response from the server
-                // Check if a redirect URL is provided
-                if (response.redirect_url) {
-                    // Redirect the user
-                    window.location.href = response.redirect_url;
-                }
-                console.log(response);
+                displayResults(response.summed_results);
+                
             },
             error: function(error) {
                 console.error(error);
             }
         });
     });
+
+    function displayResults(summedResults) {
+        var tableBody = $('#results-table tbody');
+        tableBody.empty(); // Clear any previous results
+
+        for (var party in summedResults) {
+            if (summedResults.hasOwnProperty(party)) {
+                var score = summedResults[party];
+                var row = '<tr><td>' + party + '</td><td>' + score + '</td></tr>';
+                tableBody.append(row);
+            }
+        }
+    }
 });
