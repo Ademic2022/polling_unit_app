@@ -21,6 +21,11 @@ $(document).ready(function() {
             contentType: 'application/json',
             success: function(response) {
                 // Handle the response from the server
+                // Check if a redirect URL is provided
+                if (response.redirect_url) {
+                    // Redirect the user
+                    window.location.href = response.redirect_url;
+                }
                 console.log(response);
             },
             error: function(error) {
