@@ -24,9 +24,31 @@ def summed_results():
 
     if request.method == 'POST':
         selected_lgas = request.get_json().get('selected_lgas', [])
-        response = {'message': 'Selected LGAs: {}'.format(selected_lgas)}
-    
-        return jsonify(response)
+        # Query the database to fetch the polling units in the selected local government
+        polling_units = storage.get_polling_units_by_ids(selected_lgas)
+
+        # Initialize a dictionary to store summed results for each party
+        summed_results = {}
+
+        # Loop through each polling unit and sum the results for each party
+        for polling_unit in polling_units:
+            # Query the database to fetch results for the current polling unit
+            polling_unit_id = polling_unit.uniqueid
+            results = storage.get_polling_unit_results(polling_unit_id)
+
+            # Sum the results for each party
+            for result in results:
+                party_abbreviation = result.party_abbreviation
+                party_score = result.party_score
+
+                # Add or update the party's total score in the summed_results dictionary
+                if party_abbreviation in summed_results:
+                    summed_results[party_abbreviation] += party_score
+                else:
+                    summed_results[party_abbreviation] = party_score
+
+        # Return the summed results as JSON
+        return jsonify({'summed_results': summed_results})
     
     lga = storage.get_lga()
     return render_template('summed_results.html', title='Summed Result', 

@@ -54,8 +54,8 @@
 
 
 
-{% if selected_lga %}
-    <h2>Summed Results for {{ selected_lga }}</h2>
+{% if summed_results %}
+    <h2>Summed Results for  selected_lga </h2>
     <table>
         <tr>
             <th>Party Abbreviation</th>
@@ -63,8 +63,8 @@
         </tr>
         {% for result in summed_results %}
             <tr>
-                <td>{{ result.party_abbreviation }}</td>
-                <td>{{ result.summed_score }}</td>
+                <td>result.party_abbreviation </td>
+                <td>result.summed_score </td>
             </tr>
         {% endfor %}
     </table>

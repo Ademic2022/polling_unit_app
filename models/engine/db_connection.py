@@ -76,6 +76,14 @@ class DBStorage():
         query = session.query(PollingUnit).filter_by(polling_unit_id=polling_unit_id).first()
         return query
 
+    def get_polling_units_by_ids(self, polling_unit_ids):
+        """Get polling units by their IDs."""
+        from models.polling_unit import PollingUnit
+        session = self.__create_session()
+        polling_units = session.query(PollingUnit).filter(PollingUnit.polling_unit_id.in_(polling_unit_ids)).all()
+        return polling_units
+
+
     def get_polling_unit_results(self, polling_unit):
         """get polling unit"""
         from models.announced_pu_result import AnnouncedPuResult

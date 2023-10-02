@@ -10,11 +10,10 @@ $(document).ready(function() {
         $('.lga-checkbox:checked').each(function() {
             var lgaId = $(this).data('id');
             selectedLGAs.push(lgaId);
-            console.log(selectedLGAs);
-            console.log('selectedLGAs');
+            // console.log(selectedLGAs);
         });
 
-        // Send selectedLGAs to the Flask backend using AJAX
+        // Send selectedLGAs to the backend using AJAX
         $.ajax({
             type: 'POST',
             url: '/summed_results',
