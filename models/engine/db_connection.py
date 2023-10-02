@@ -73,7 +73,7 @@ class DBStorage():
         """get polling unit by id"""
         from models.polling_unit import PollingUnit
         session = self.__create_session()
-        query = session.query(PollingUnit).filter_by(uniqueid=polling_unit_id).first()
+        query = session.query(PollingUnit).filter_by(polling_unit_id=polling_unit_id).first()
         return query
 
     def get_polling_unit_results(self, polling_unit):
@@ -83,6 +83,13 @@ class DBStorage():
         query = session.query(AnnouncedPuResult).filter_by(polling_unit_uniqueid=polling_unit).all()
         return query
     
+    def get_lga(self):
+        """get polling unit"""
+        from models.lga import Lga
+        session = self.__create_session()
+        query = session.query(Lga).all()
+        return query
+
     def reload(self):
         """reload database session"""
         Base.metadata.create_all(self.__engine)

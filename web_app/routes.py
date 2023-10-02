@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, jsonify
 from models import storage
 
 views = Blueprint('route', __name__)
@@ -17,3 +17,17 @@ def polling_unit(polling_unit_id):
     return render_template('result.html', title='Polling Unit Result', 
                            polling_unit_results=polling_unit_results,
                            polling_unit_name=unit_name)
+
+
+@views.route('/summed_results', methods=['GET', 'POST'])
+def summed_results():
+
+    if request.method == 'POST':
+        selected_lgas = request.get_json().get('selected_lgas', [])
+        response = {'message': 'Selected LGAs: {}'.format(selected_lgas)}
+    
+        return jsonify(response)
+    
+    lga = storage.get_lga()
+    return render_template('summed_results.html', title='Summed Result', 
+                           local_governments=lga)

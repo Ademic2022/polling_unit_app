@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="ui container fluid">
+    <h3 class="ui block header">
+        {{ title }}
+    </h3>
+</div><br>
+<div class="ui container fluid">
+    <table class="ui orange compact celled definition table">
+        <thead class="full-width">
+            <tr>
+              <th></th>
+              <th colspan="4">
+                <div class="ui right floated small primary labeled icon button" id="select-lgas-button">
+                  <i class="checkmark icon"></i> Sum Result
+                </div>
+                <div class="ui small button" id="select_all">
+                  Select All
+                </div>
+              </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Sn</th>
+                <th>LGA Name</th>
+                <th>LGA Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lga in local_governments %}
+            <tr>
+                <td class="collapsing">
+                    <div class="ui fitted slider checkbox">
+                        <input type="checkbox" class="lga-checkbox" data-id="{{ lga.lga_id }}">
+                        <label></label>
+                    </div>
+                </td>
+                <td>{{ loop.index }}</td>
+                <td>{{ lga.lga_name }}</td>
+                <td>{{ lga.lga_description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block summed_result %}
+<script src="{{ url_for('static', filename='scripts/summed_result.js')  }}"></script>
+{% endblock %}
+
+
+
+{% if selected_lga %}
+    <h2>Summed Results for {{ selected_lga }}</h2>
+    <table>
+        <tr>
+            <th>Party Abbreviation</th>
+            <th>Summed Score</th>
+        </tr>
+        {% for result in summed_results %}
+            <tr>
+                <td>{{ result.party_abbreviation }}</td>
+                <td>{{ result.summed_score }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
