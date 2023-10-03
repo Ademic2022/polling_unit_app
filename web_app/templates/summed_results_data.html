@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="ui container fluid">
+    <h3 class="ui block header">
+        {{ title }}
+    </h3>
+</div><br>
+<div class="ui container fluid">
+    <table id="results-table" class="ui green celled striped table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    RESULT
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>S/n</th>
+                <th>Party</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if summed_results %}
+            {% for party, result in summed_results.items() %}
+                <tr>
+                    <td style="width: 100px;">{{ loop.index }}</td>
+                    <td>{{ party }}</td>
+                    <td>{{ result }}</td>
+                </tr>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+        </tbody>
+        <tfoot>
+            <a href="#" class="">
+                <tr>
+                    <td data-label="status">
+                        <div class="ui buttons">
+                            <a href="{{ url_for('route.summed_results') }}">
+                                <button class="ui positive button active">
+                                    Back
+                                </button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </a>
+        </tfoot>
+    </table>
+</div><br>
+{% endblock %}
