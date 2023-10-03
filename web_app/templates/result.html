@@ -12,7 +12,11 @@
         <thead>
             <tr>
                 <th colspan="5">
-                    {{ title }}
+                    <a href="{{ url_for('route.home')}}">
+                        <div class="ui small primary button">
+                            Back to Home
+                        </div>
+                    </a>
                 </th>
             </tr>
         </thead>
@@ -26,18 +30,21 @@
             </tr>
         </thead>
         <tbody>
-            {% for result in polling_unit_results %}
-            <a href="#" class="">
+            {% if polling_unit_results %}
+                {% for result in polling_unit_results %}
                 <tr>
                     <td class="one width">{{ loop.index }}</td>
                     <td>{{ result.party_abbreviation }}</td>
                     <td>{{ result.party_score }}</td>
                     <td>{{ result.date_entered.strftime('%b %d, %Y at %H:%M') }}</td>
-                    <td>{{ result.entered_by_user }}</td>
-                    
+                    <td>{{ result.entered_by_user }}</td> 
                 </tr>
-            </a>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+            <tr>
+                <td class="one width">No Result for this selection! </td>
+            </tr>
+            {% endif %}
         </tbody>
     </table>
 </div>
