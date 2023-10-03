@@ -29,6 +29,12 @@ class DBStorage():
             pool_pre_ping=True
         )
 
+        if env == 'test':
+            Base.metadata.drop_all(self.__engine)
+        else:
+            
+            Base.metadata.create_all(self.__engine)
+            
     def __create_session(self):
         """Create a session with the SQLAlchemy engine."""
         if self.__session is None:
@@ -67,6 +73,13 @@ class DBStorage():
         from models.polling_unit import PollingUnit
         session = self.__create_session()
         query = session.query(PollingUnit).all()
+        return query
+    
+    def get_parties(self):
+        """get polling unit"""
+        from models.parties import Party
+        session = self.__create_session()
+        query = session.query(Party).all()
         return query
     
     def get_polling_unit_by_id(self, polling_unit_id):
