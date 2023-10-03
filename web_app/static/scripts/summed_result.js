@@ -20,26 +20,14 @@ $(document).ready(function() {
             data: JSON.stringify({ 'selected_lgas': selectedLGAs }),
             contentType: 'application/json',
             success: function(response) {
-                // Handle the response from the server
-                displayResults(response.summed_results);
-                
+                var redirectUrl = response.data.redirect_url;
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }  
             },
             error: function(error) {
                 console.error(error);
             }
         });
     });
-
-    function displayResults(summedResults) {
-        var tableBody = $('#results-table tbody');
-        tableBody.empty(); // Clear any previous results
-
-        for (var party in summedResults) {
-            if (summedResults.hasOwnProperty(party)) {
-                var score = summedResults[party];
-                var row = '<tr><td>' + party + '</td><td>' + score + '</td></tr>';
-                tableBody.append(row);
-            }
-        }
-    }
 });
