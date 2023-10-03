@@ -1,4 +1,4 @@
 # polling_unit_app
 
 ### Live Demo
-[Demo](https://ademic-polling-unit.hf.space)
+**Demo:** [Visit the project demo](https://ademic-polling-unit.hf.space)
