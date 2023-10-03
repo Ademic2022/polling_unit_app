@@ -11,15 +11,20 @@
     <table class="ui orange compact celled definition table">
         <thead class="full-width">
             <tr>
-              <th></th>
-              <th colspan="4">
-                <div class="ui right floated small primary labeled icon button" id="select-lgas-button">
-                  <i class="checkmark icon"></i> Sum Result
-                </div>
-                <div class="ui small button" id="select_all">
-                  Select All
-                </div>
-              </th>
+                <th></th>
+                <th colspan="4">
+                    <div class="ui right floated small primary labeled icon button" id="select-lgas-button">
+                    <i class="checkmark icon"></i> Sum Result
+                    </div>
+                    <div class="ui small teal button" id="select_all">
+                    Select All
+                    </div>
+                    <a href="{{ url_for('route.home')}}">
+                        <div class="ui small primary button">
+                            Back to Home
+                        </div>
+                    </a>
+                </th>
             </tr>
         </thead>
         <thead>
@@ -46,19 +51,7 @@
             {% endfor %}
         </tbody>
     </table><br>
-
-    <table id="results-table">
-        <thead>
-            <tr>
-                <th>Party</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Results will be displayed here -->
-        </tbody>
-    </table>
-</div>
+</div><br>
 {% endblock %}
 {% block summed_result %}
 <script src="{{ url_for('static', filename='scripts/summed_result.js')  }}"></script>
