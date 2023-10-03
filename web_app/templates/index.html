@@ -9,10 +9,20 @@
 </div><br>
 <div class="ui container fluid">
     <table class="ui orange celled striped table">
-        <thead>
+        <thead class="full-width">
             <tr>
                 <th colspan="5">
+                    <a href="{{ url_for('route.summed_results')}}">
+                        <div class="ui right floated small primary button">
+                            Collate
+                        </div>
+                    </a>
                     {{ title }}
+                    <a href="{{ url_for('route.new_result')}}">
+                        <div class="ui small teal button">
+                            Enter New Result
+                        </div>
+                    </a>
                 </th>
             </tr>
         </thead>
