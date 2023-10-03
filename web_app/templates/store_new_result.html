@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="ui container fluid">
+    <h3 class="ui block header">
+        {{ title }}
+    </h3>
+    <div class="ui buttons">
+        <a href="{{ url_for('route.home') }}">
+            <button class="ui right floated teal button">
+                Home Page
+            </button>
+        </a>
+    </div>
+</div><br>
+<div class="ui container">
+    <div class="column mystyle" style="min-width: 70%;">
+    {% include '_message.html' %}
+        <h2 class="ui teal header">
+            <div class="content">
+            Register Result for a New Polling Unit
+            </div>
+        </h2>
+        <form class="ui large form" method="POST", action="{{ url_for('route.new_result') }}">
+            <div class="ui stacked segment">
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="polling_unit_name" placeholder="Polling Unit Name" required>
+                </div>
+            </div>
+            <h4 class="dividing header">Results for Parties:</h4>
+            <div class="two fields">
+                {% for party in parties %}
+                <div class="field">
+                    <label for="{{ party.partyid }}">{{ party.partyname}}</label> 
+                    <input type="number" name="{{ party.partyid }}" placeholder="Enter Result">
+                </div>
+                {% endfor %}
+            </div>
+            <input type="submit" class="ui fluid large teal submit button">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
